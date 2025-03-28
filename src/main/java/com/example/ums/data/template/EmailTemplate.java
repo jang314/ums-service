@@ -23,6 +23,5 @@ public class EmailTemplate extends Template {
 
     public EmailTemplate(String templateName, String subject, String serviceType, TemplateItem... items) {
         this.subject = subject;
-
     }
 }
