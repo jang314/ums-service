@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TemplateItemUseRepository extends JpaRepository<TemplateItemUse, Long> {
-    List<TemplateItemUse> findByTemplateId(Long id);
+public interface TemplateItemUseRepository extends JpaRepository<TemplateItemUse, TemplateItemUseId> {
 }

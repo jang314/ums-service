@@ -1,7 +1,14 @@
 package com.example.ums.dto;
 
-public class TemplateDto {
-    private String title;
-    private String description;
+import com.example.ums.service.template.TemplateItemComponent;
 
+public record TemplateDto(Long id,
+                           String templateName,
+                           String channel,
+                           String serviceType,
+                           TemplateItemComponent template) {
+
+    TemplateDto(String templateName, String channel, String serviceType, TemplateItemComponent template){
+        this(null, templateName, channel, serviceType, template);
+    }
 }
