@@ -1,26 +1,23 @@
 package com.example.ums.validator;
 
-import com.example.ums.service.template.ItemDto;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
-public class ArrayValidator extends ItemAdditionalValidator  {
+public class ArrayValidator extends TemplateItemDecorator {
     private int minSize = 0;
     private int maxSize = 0;
 
-    public ArrayValidator(TypeValidator validator) {
+    public ArrayValidator(TemplateItem validator) {
         super(validator);
     }
 
-    public ArrayValidator(TypeValidator validator, int minSize) {
+    public ArrayValidator(TemplateItem validator, int minSize) {
         super(validator);
         this.minSize = minSize;
     }
 
-    public ArrayValidator(TypeValidator validator, int minSize, int maxSize) {
+    public ArrayValidator(TemplateItem validator, int minSize, int maxSize) {
         super(validator);
         this.minSize = minSize;
         this.maxSize = maxSize;

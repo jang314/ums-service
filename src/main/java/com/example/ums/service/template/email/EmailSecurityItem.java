@@ -1,32 +1,46 @@
 package com.example.ums.service.template.email;
 
 
+import com.example.ums.service.template.TemplateItemComponent;
+import com.example.ums.service.template.item.BasicTemplateDisplay;
+import com.example.ums.service.template.item.FileItem;
+import com.example.ums.service.template.item.TemplateDisplay;
+import com.example.ums.service.template.item.template_type.TextTemplateItem;
 import com.example.ums.validator.ArrayValidator;
-import com.example.ums.validator.FileValidator;
 import com.example.ums.validator.ItemValidator;
-import com.example.ums.validator.TypeValidator;
+import com.example.ums.validator.TemplateItem;
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @Component
 public class EmailSecurityItem extends EmailTemplateItem {
+    private final TemplateDisplay templateDisplay;
 
     @Autowired
     public EmailSecurityItem() {
-        TypeValidator cover = new ItemValidator("cover", "string", true);
-        TypeValidator security = new ItemValidator("files", "array", true);
-        TypeValidator array = new ArrayValidator(security, 1, 10);
+        TemplateDisplay templateDisplay = new BasicTemplateDisplay("email");
+        templateDisplay = new TextTemplateItem("subject", false, templateDisplay);
+        templateDisplay = new FileItem("cover", true, templateDisplay);
+        templateDisplay = new FileItem("body", false, templateDisplay);
+        templateDisplay = new FileItem("footer", false, templateDisplay);
+        templateDisplay = new FileItem("files", true, templateDisplay);
 
-        items.add(new FileValidator(cover, "html")); // 파일 존재 유무 및 확장자 검증
-        items.add(new FileValidator(array, "html"));
+        this.templateDisplay = templateDisplay;
     }
 
-
+    @Override
+    public boolean getServiceType(String serviceType) {
+        return "security".equals(serviceType);
+    }
 
     @Override
-    protected boolean supports(String serviceType) {
-        return "security".equals(serviceType);
+    public JsonNode makeTemplate(JsonNode template) {
+        return null;
     }
 }

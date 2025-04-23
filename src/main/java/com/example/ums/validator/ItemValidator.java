@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
-public record ItemValidator (String name, String type, boolean required, List<TypeValidator> typeValidator) implements TypeValidator {
+public record ItemValidator (String name, String type, boolean required, List<TemplateItem> typeValidator) implements TemplateItem {
 
     public ItemValidator(String name, String type) {
         this(name, type, false, null);
@@ -17,7 +17,7 @@ public record ItemValidator (String name, String type, boolean required, List<Ty
         this(name, type, required, null);
     }
 
-    public ItemValidator(String name, String type, TypeValidator... typeValidators) {
+    public ItemValidator(String name, String type, TemplateItem... typeValidators) {
         this(name, type, false, Arrays.asList(typeValidators));
     }
 
